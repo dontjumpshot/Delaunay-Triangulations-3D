@@ -69,10 +69,11 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 					//}
 				}
 
-				common::rotatepopvector(m_tetrahedrones, i);
+				common::rotatepopvector(m_tetrahedrones, i);  //弹出索引为i的四面体
 			}
 		}
 
+		//遍历polygon中每个三角形
 		for (auto &tr : polygon)
 		{
 			m_tetrahedrones.push_back(
@@ -80,6 +81,7 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 		}
 	}
 
+	//删除与四面体四个顶点有关的四面体
 	for (int i = (int)m_tetrahedrones.size() - 1; i >= 0; --i)
 	{
 		if (m_tetrahedrones[i].IsContainVertex(p1)
@@ -87,7 +89,7 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 			|| m_tetrahedrones[i].IsContainVertex(p3)
 			|| m_tetrahedrones[i].IsContainVertex(p4))
 		{
-			common::rotatepopvector(m_tetrahedrones, i);
+			common::rotatepopvector(m_tetrahedrones, i);  //弹出索引为i的四面体
 		}
 	}
 }
