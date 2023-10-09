@@ -44,9 +44,9 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 	const Vector3 p4(midx, midy, midz + 20 * deltaMax);
 
 	m_tetrahedrones.clear();  //清空
-	m_tetrahedrones.push_back(cTetrahedron(p1, p2, p3, p4));  //cTetrahedron函数构造一个四面体存储在m_tetrahedrones数组中
+	m_tetrahedrones.push_back(cTetrahedron(p1, p2, p3, p4));  //调用cTetrahedron类的带参构造函数创建一个四面体存储在m_tetrahedrones容器中
 
-	std::vector<cTriangle> allPolygon;  //allPolygon数组存储所有三角形
+	std::vector<cTriangle> allPolygon;  //allPolygon容器存储所有三角形
 	
 	for (auto &p : vertices)  //遍历点集中的每个点
 	{
@@ -59,9 +59,9 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 				for (int k = 0; k < 4; ++k)
 				{
 					// Áßº¹ÀÌ ¾Æ´Ò¶§ ¸¸, Ãß°¡
-					//polygon容器中寻找m_tetrahedrones[i].m_tr[k]元素的位置，若相等则没有找到该元素；若不相等则找到该元素
+					//polygon容器中寻找m_tetrahedrones[i].m_tr[k]元素（即四面体的四个三角面）的位置，若相等则没有找到该元素；若不相等则找到该元素
 					if (polygon.end() == find(polygon.begin(), polygon.end(), m_tetrahedrones[i].m_tr[k]))
-						polygon.push_back(m_tetrahedrones[i].m_tr[k]);  //将该元素添加到polygon容器
+						polygon.push_back(m_tetrahedrones[i].m_tr[k]);  //将该元素添加到polygon容器（把四面体的四个三角面存入polygon容器）
 					//if (allPolygon.end() == find(allPolygon.begin(), allPolygon.end(), m_tetrahedrones[i].m_tr[k]))
 					//{
 					//	allPolygon.push_back(m_tetrahedrones[i].m_tr[k]);
@@ -73,15 +73,15 @@ void cDelaunay3D::Triangulate(std::vector<Vector3> &vertices)  //vertices相当�
 			}
 		}
 
-		//遍历polygon中每个三角形
+		//遍历polygon容器中的三角面
 		for (auto &tr : polygon)
 		{
 			m_tetrahedrones.push_back(
-				cTetrahedron(tr.m_p1, tr.m_p2, tr.m_p3, p));
+				cTetrahedron(tr.m_p1, tr.m_p2, tr.m_p3, p)); //polygon容器中三角面的三个顶点与点p(点集中的点)构造一个四面体
 		}
 	}
 
-	//删除与四面体四个顶点有关的四面体
+	//删除与超级四面体四个顶点有关的四面体
 	for (int i = (int)m_tetrahedrones.size() - 1; i >= 0; --i)
 	{
 		if (m_tetrahedrones[i].IsContainVertex(p1)
