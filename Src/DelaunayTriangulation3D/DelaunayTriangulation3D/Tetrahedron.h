@@ -1,6 +1,6 @@
 //
 // 2016-12-27, jjuiddong
-// Tetrahedron (���ü) �� ǥ���ϴ� Ŭ����
+// Tetrahedron (사면체) 을 표현하는 클래스
 //
 #pragma once
 
@@ -9,7 +9,7 @@
 namespace delaunay3d
 {
 
-	class cTetrahedron
+	class cTetrahedron  //四面体类
 	{
 	public:
 		cTetrahedron();
@@ -30,10 +30,10 @@ namespace delaunay3d
 
 
 	public:
-		cTriangle m_tr[4];
-		Vector3 m_p[4];
-		Vector3 m_circumCenter;
-		float m_radius;
+		cTriangle m_tr[4];  //四面体的4个三角形面
+		Vector3 m_p[4];  //四面体的4个顶点
+		Vector3 m_circumCenter;  //四面体的外接圆心坐标
+		float m_radius;  //四面体的外接球半径
 	};
 
 }
