@@ -11,8 +11,8 @@ namespace delaunay3d
 	public:
 		void Triangulate(std::vector<Vector3> &vertices);
 		
-		std::vector<Vector3> m_vertices;
-		std::vector<cTetrahedron> m_tetrahedrones;
+		std::vector<Vector3> m_vertices;  //顶点
+		std::vector<cTetrahedron> m_tetrahedrones;  //四面体
 	};
 
 }
