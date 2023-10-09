@@ -19,8 +19,8 @@ namespace common
 		void Normalize();
 		float	DotProduct( const Vector3& v ) const;
 		Vector3 CrossProduct( const Vector3& v ) const;
-		Vector3 MultiplyNormal( const Matrix44& rhs ) const;
-		Vector3 Interpolate( const Vector3 &v, const float alpha) const;
+		Vector3 MultiplyNormal( const Matrix44& rhs ) const;  //与4x4矩阵的乘法
+		Vector3 Interpolate( const Vector3 &v, const float alpha) const;  //线性插值
 	
 		Vector3 operator + () const;
 		Vector3 operator - () const;
